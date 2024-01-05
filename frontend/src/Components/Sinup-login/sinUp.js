@@ -3,22 +3,17 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import classes from './sinUp.module.css'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-// import AuthContext from '../../Store/AuthContext';
-// import { useDispatch, useSelector } from 'react-redux';
-// import {authActions} from '../../Store/logInContext'
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { tokenAction } from '../../Store/TokenContext';
 
 const SinUp = (props) =>{
-
-    // const dispatch  = useDispatch()
-    // const token = useSelector(state => state.auth.token)
     
+    const dispatch = useDispatch()
 
     const [isLogin, setIsLogin] = useState(true);
     const [isLodding, setIsLodding] = useState(false);
     const history = useHistory()
-
-    // const authCntx = useContext(AuthContext)
 
     const enteredEmailRef = useRef()
     const enteredPasswordRef = useRef()
@@ -46,6 +41,8 @@ const SinUp = (props) =>{
 
         console.log(res)
     }
+
+
     const submiLogIntHandler = async(event)=>{
         event.preventDefault()
 
@@ -59,7 +56,12 @@ const SinUp = (props) =>{
 
             const res = await axios.post("http://localhost:8000/user/login-data",obj)
 
-            console.log(res)
+            dispatch(tokenAction.loginHandler(res.data.token))
+
+            if(res.data.token){
+                history.push('/home')
+            }
+            console.log(res.data.token)
 
         }catch(err){
             console.log(err)

@@ -1,0 +1,15 @@
+.homeDiv{
+    display: flex;
+    /* border: 2px solid rgb(234, 255, 0); */
+    /* width: 100%; */
+}
+
+.SideBarDiv{
+    width: 20%;
+    /* border: 2px solid rgb(76, 0, 255); */
+}
+
+.DashbordDiv{
+    width: 80%;
+    /* border: 2px solid rgb(255, 0, 0); */
+}

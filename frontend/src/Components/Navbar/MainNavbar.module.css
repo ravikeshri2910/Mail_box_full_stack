@@ -1,0 +1,19 @@
+.active{
+    /* border: 2px solid red; */
+    padding: 5%;
+    color: palevioletred;
+    background-color: rgb(74, 64, 64);
+    border-radius: 10px;
+   
+}
+
+.navLink{
+    /* border: 2px solid rgb(0, 255, 13); */
+    padding: 5%;
+    margin: 0 8%;
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: bolder;
+    
+}
+

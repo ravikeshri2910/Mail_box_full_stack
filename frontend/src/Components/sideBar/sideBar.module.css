@@ -1,0 +1,27 @@
+.sideBar {
+    /* border: 2px solid rgb(76, 0, 255); */
+    width: 20%;
+    height: 500px;
+    position: fixed;
+    padding-bottom: 30%; 
+    background-color: rgb(184, 176, 176);
+    /* bottom: 0; */
+}
+
+/* Regular button styles */
+.btn {
+
+    width: 100%;
+    margin: 2% 0;
+}
+
+/* Styles for the active button */
+.active {
+
+    background-color: grey;
+    /* Change background color */
+    color: #fff;
+    /* Change text color */
+    border: 2px solid grey;
+
+}
