@@ -45,7 +45,7 @@ exports.logInRoute = async(req, res) =>{
             if(err){
                 res.status(201).json({msg : 'Password is wrong'})
             }if(result){
-                res.status(201).json({msg : 'login', token : generateWebToken(user.id)})
+                res.status(201).json({msg : 'login',email : email, token : generateWebToken(user.id)})
             }else{
                 res.status(201).json({msg : 'Something is wrong'})
             }

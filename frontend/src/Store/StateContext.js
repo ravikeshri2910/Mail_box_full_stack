@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isModel: false,
+  isInbox:false,
+  isDeleteInbox:false,
+  isSent : false
 };
 
 const stateSlice = createSlice({
@@ -11,6 +14,21 @@ const stateSlice = createSlice({
     modelHandler(state) {
       state.isModel = !state.isModel; // Correct way to update a boolean state
     },
+
+    inboxHandler(state){
+      state.isInbox = true
+      state.isDeleteInbox=true
+      state.isSent = false
+    },
+    inboxHandlerFalse(state){
+      state.isInbox = false
+      state.isSent = false
+    },
+    sentHandler(state){
+      state.isInbox = false
+      state.isSent = true
+      state.isDeleteInbox=false
+    }
   },
 });
 

@@ -3,10 +3,12 @@ import React from "react";
 import classes from './MainNavbar.module.css'
 import { NavLink , Link} from "react-router-dom/";
 import { Nav, Navbar, Container } from 'react-bootstrap';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { tokenAction } from "../../Store/TokenContext";
 const MainNavbar = (props) => {
     const dispatch = useDispatch()
+
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
     const logOutHandler = ( )=>{
      dispatch(tokenAction.logOutHandler())
     }
@@ -23,9 +25,9 @@ const MainNavbar = (props) => {
                         <NavLink exact to="/"  className={classes.navLink}>
                             Home
                         </NavLink>
-                        <NavLink to="/" className={classes.navLink} onClick={logOutHandler} >
+                       {isLoggedIn && <NavLink to="/" className={classes.navLink} onClick={logOutHandler} >
                             LogOut
-                        </NavLink>
+                        </NavLink>}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

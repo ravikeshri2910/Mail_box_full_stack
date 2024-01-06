@@ -1,11 +1,3 @@
-// import React, { useRef } from "react";
-// import { Editor } from "react-draft-wysiwyg";
-// import { convertToRaw } from 'draft-js'
-// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-// import classes from './ComposeEmail.module.css'
-// import { Button } from "react-bootstrap";
-// import { stateAction } from "../../Store/StateContext";
-// import { useDispatch } from "react-redux";
 
 import React, { useRef, useState } from "react";
 import { EditorState, convertToRaw } from 'draft-js';
@@ -15,6 +7,7 @@ import classes from './ComposeEmail.module.css';
 import { Button } from "react-bootstrap";
 import { stateAction } from "../../Store/StateContext";
 import { useDispatch } from "react-redux";
+import axios from 'axios'
 
 const ComposeEmail = () => {
 
@@ -27,7 +20,7 @@ const ComposeEmail = () => {
         dispatch(stateAction.modelHandler());
     };
 
-    const logEditorContent = () => {
+    const logEditorContent = async() => {
         const contentState = editorState.getCurrentContent();
         const editorText = contentState.getPlainText();
         const raw = convertToRaw(editorState.getCurrentContent());
@@ -38,6 +31,20 @@ const ComposeEmail = () => {
         console.log('Editor Text:', editorText);
         console.log('To:', to);
         console.log('Subject:', subject);
+
+        const obj = {
+            to : toRef.current.value,
+            subject : subjectRef.current.value,
+            body : editorText
+        }
+
+        const token = localStorage.getItem('token')
+
+        const res = await axios.post("http://localhost:8000/user/sent",obj,{
+            headers : {"Authorization" : token}
+        })
+
+        console.log(res)
 
         // Clear the editor's content
         toRef.current.value=''

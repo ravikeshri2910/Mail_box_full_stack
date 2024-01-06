@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import classes from './sideBar.module.css';
 import { stateAction } from '../../Store/StateContext';
@@ -17,42 +17,48 @@ const SideBar = (props) => {
   };
   const inboxHandler = (buttonName) => {
     setActiveButton(buttonName);
-   
+    dispatch(stateAction.inboxHandler())
   };
+
+  useEffect(()=>{
+    inboxHandler('Inbox')
+  },[])
+  
   const sentHandler = (buttonName) => {
-    setActiveButton(buttonName);
- 
+   setActiveButton(buttonName);
+    dispatch(stateAction.sentHandler())
+
   };
 
   return (<>
     {model && <Model/>}
     <div className={classes.sideBar}>
-      <div className={classes.btn}>
+      <div className={classes.composeBtn}>
         <Button
           variant="info"
           className={activeButton === 'Compose Email' ? classes.active : ''}
           onClick={() => composeEmailHandler()}
         >
-          Compose Email
+          <b>Compose Email</b>
         </Button>
       </div>
       <div className={classes.btn}>
-        <Button
+        <button
           variant="info"
           className={activeButton === 'Inbox' ? classes.active : ''}
           onClick={() => inboxHandler('Inbox')}
         >
           Inbox
-        </Button>
+        </button>
       </div>
       <div className={classes.btn}>
-        <Button
+        <button
           variant="info"
           className={activeButton === 'Sent' ? classes.active : ''}
           onClick={() => sentHandler('Sent')}
         >
           Sent
-        </Button>
+        </button>
       </div>
     </div>
     </>
