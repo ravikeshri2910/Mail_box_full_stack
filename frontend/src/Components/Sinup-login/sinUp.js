@@ -18,14 +18,14 @@ const SinUp = (props) =>{
     const enteredEmailRef = useRef()
     const enteredPasswordRef = useRef()
     const enteredConfirmPasswordRef = useRef()
-    const enteredNameRef = useRef()
+    // const enteredNameRef = useRef()
 
     const submiSinuptHandler = async(event)=>{
         event.preventDefault()
         // console.log(enteredNameRef.current.value)
 
         const obj = {
-                    name : enteredNameRef.current.value,
+                    // name : enteredNameRef.current.value,
                     email : enteredEmailRef.current.value,
                     password : enteredPasswordRef.current.value
                 }
@@ -49,19 +49,23 @@ const SinUp = (props) =>{
         try{
 
             const obj = {
-                name : enteredNameRef.current.value,
+                // name : enteredNameRef.current.value,
                 email : enteredEmailRef.current.value,
                 password : enteredPasswordRef.current.value
             }
 
             const res = await axios.post("http://localhost:8000/user/login-data",obj)
 
-            dispatch(tokenAction.loginHandler(res.data.token))
+            // dispatch(tokenAction.loginHandler(res.data.token))
+            dispatch(tokenAction.loginHandler({
+                token :res.data.token,
+                email : res.data.email
+             }))
 
             if(res.data.token){
                 history.push('/home')
             }
-            console.log(res.data.token)
+            console.log(res.data)
 
         }catch(err){
             console.log(err)
@@ -77,10 +81,10 @@ const SinUp = (props) =>{
         {console.log('sin')}
         <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
         <form onSubmit={isLogin ? submiLogIntHandler : submiSinuptHandler}>
-            <div className={classes.control}>
+            {/* <div className={classes.control}>
                 <label htmlFor='name'>Your Name</label>
                 <input type='text' id='name' ref={enteredNameRef} required />
-            </div>
+            </div> */}
             <div className={classes.control}>
                 <label htmlFor='email'>Your Email</label>
                 <input type='email' id='email' ref={enteredEmailRef} required />

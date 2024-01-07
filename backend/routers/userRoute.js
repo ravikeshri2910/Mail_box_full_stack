@@ -21,4 +21,8 @@ router.delete('/delete-inbox-data/:id', auth.authenticateUser , mailControl.inbo
 
 router.delete('/delete-sent-data/:id', auth.authenticateUser , mailControl.deleteSentData);
 
+router.get('/get-sentMail-data/:id', auth.authenticateUser , mailControl.getOneSentMailData);
+
+router.get('/get-inboxMail-data/:id', auth.authenticateUser , mailControl.getOneInboxMailData);
+
 module.exports = router ;

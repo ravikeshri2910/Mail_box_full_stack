@@ -25,12 +25,12 @@ const ComposeEmail = () => {
         const editorText = contentState.getPlainText();
         const raw = convertToRaw(editorState.getCurrentContent());
 
-        const to = toRef.current.value;
-        const subject = subjectRef.current.value;
+        // const to = toRef.current.value;
+        // const subject = subjectRef.current.value;
 
-        console.log('Editor Text:', editorText);
-        console.log('To:', to);
-        console.log('Subject:', subject);
+        // console.log('Editor Text:', editorText);
+        // console.log('To:', to);
+        // console.log('Subject:', subject);
 
         const obj = {
             to : toRef.current.value,
@@ -44,12 +44,13 @@ const ComposeEmail = () => {
             headers : {"Authorization" : token}
         })
 
-        console.log(res)
+        // console.log(res)
 
         // Clear the editor's content
         toRef.current.value=''
         subjectRef.current.value=''
         setEditorState(EditorState.createEmpty());
+        dispatch(stateAction.modelHandler());
     };
 
     const onEditorStateChange = (editorState) => {

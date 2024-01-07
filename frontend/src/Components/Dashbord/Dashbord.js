@@ -5,6 +5,7 @@ import DashbordData from "./DashbordData";
 import { useDispatch, useSelector } from "react-redux";
 import { stateAction } from "../../Store/StateContext";
 import axios from "axios";
+import MailDetail from "./MailDetails";
 
 const d = [
     {
@@ -29,6 +30,7 @@ const Dashbord = (props) => {
     const [isLoading, setIsLoading] = useState(false)
     const isInbox = useSelector(state => state.stateReducer.isInbox)
     const isSent = useSelector(state => state.stateReducer.isSent)
+    const openMail = useSelector(state => state.stateReducer.openMail)
     const [mailData , setMAilData] = useState([])
 
     const inboxData = async() =>{
@@ -41,7 +43,7 @@ const Dashbord = (props) => {
         })
 
         
-        console.log('res', res.data.msg)
+        console.log('resInbox', res.data.msg)
         dispatch(stateAction.inboxHandlerFalse())
         const data = res.data.msg
         if(data){
@@ -83,6 +85,7 @@ const Dashbord = (props) => {
             id = {mail.id}
             to = {mail.to}
             from = {mail.from}
+            unread = {mail.unRead}
             subject = {mail.subject}
             />
         )
@@ -90,7 +93,8 @@ const Dashbord = (props) => {
 
     return <div>
        {isLoading && <p>Loading...</p>}
-        {!isLoading && mail}
+        {!isLoading && !openMail && mail}
+        {openMail && <MailDetail />}
     </div>
 }
 

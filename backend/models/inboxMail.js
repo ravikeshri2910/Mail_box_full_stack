@@ -25,6 +25,11 @@ const inbox = sequelize.define('inboxes',{
 
     body : {
         type : Sequelize.STRING
+    },
+
+    unRead : {
+        type : Sequelize.BOOLEAN,
+        defaultValue : false
     }
 })
 

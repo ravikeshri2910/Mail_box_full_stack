@@ -9,6 +9,8 @@ const MainNavbar = (props) => {
     const dispatch = useDispatch()
 
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+    const email = useSelector(state => state.auth.email)
+
     const logOutHandler = ( )=>{
      dispatch(tokenAction.logOutHandler())
     }
@@ -19,12 +21,15 @@ const MainNavbar = (props) => {
                 <Navbar.Brand as={NavLink} to="/" className={classes.navBrand}>
                     MailBox
                 </Navbar.Brand>
+                <Navbar.Brand as={NavLink} to="/" className={classes.navBrand}>
+                    {email}
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <NavLink exact to="/"  className={classes.navLink}>
+                        {/* <NavLink exact to="/"  className={classes.navLink}>
                             Home
-                        </NavLink>
+                        </NavLink> */}
                        {isLoggedIn && <NavLink to="/" className={classes.navLink} onClick={logOutHandler} >
                             LogOut
                         </NavLink>}

@@ -50,3 +50,18 @@
 .deleteDiv:hover{
     color: black;
 }
+
+.unreadDiv{
+
+    border: 2px solid transparent;
+    width: 2%;
+    border-radius: 20px;
+}
+.unread{
+    border-radius: 50px;
+    background-color: blue;
+    width: 100%;
+    height: 100%;
+    /* border: 2px solid rgb(0, 140, 255); */
+    /* margin-top: 1%; */
+}

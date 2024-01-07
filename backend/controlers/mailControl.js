@@ -94,4 +94,46 @@ exports.deleteSentData = async(req , res) =>{
     }
 }
 
+exports.getOneSentMailData = async(req, res) =>{
+    try{
+
+        const id = req.params.id
+
+        const data = await Sent.findOne({
+            where : {
+                id : id
+            }
+        })
+
+        res.status(201).json({msg : data, id})
+    }catch(err){
+        console.log(err)
+    }
+}
+exports.getOneInboxMailData = async(req, res) =>{
+    try{
+
+        const id = req.params.id
+
+        const data = await Inbox.findOne({
+            where : {
+                id : id
+            }
+        })
+
+        if (data) {
+            // Update the 'unRead' column value to 'true'
+            data.unRead = true;
+            await data.save(); // Save the changes to the database
+            // console.log('Column updated successfully!');
+        } else {
+            console.log('Inbox entry not found.');
+        }
+
+        res.status(201).json({msg : data, id})
+    }catch(err){
+        console.log(err)
+    }
+}
+
 

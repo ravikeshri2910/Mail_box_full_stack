@@ -25,6 +25,11 @@ const sent = sequelize.define('sents',{
 
     body : {
         type : Sequelize.STRING
+    },
+
+    unRead : {
+        type : Sequelize.BOOLEAN,
+        defaultValue : true
     }
 })
 
