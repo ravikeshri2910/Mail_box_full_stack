@@ -1,8 +1,8 @@
-import React, { useRef, useState ,useContext} from 'react'
+import React, { useRef, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-import classes from './sinUp.module.css'
+import classes from './sinup.module.css'
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { tokenAction } from '../../Store/TokenContext';
@@ -20,6 +20,8 @@ const SinUp = (props) =>{
     const enteredConfirmPasswordRef = useRef()
     // const enteredNameRef = useRef()
 
+    const port = process.env.REACT_APP_PORT;
+
     const submiSinuptHandler = async(event)=>{
         event.preventDefault()
         // console.log(enteredNameRef.current.value)
@@ -31,11 +33,11 @@ const SinUp = (props) =>{
                 }
 
         const res = await axios.post(
-            "http://localhost:8000/user/sinup-data",
+            `http://${port}/user/sinup`,
             obj
           )
 
-        if(res.data.msg ===  "Regitered"){
+        if(res.data.msg ===  "Registered"){
             switchAuthModeHandler()
         }
 
@@ -47,15 +49,14 @@ const SinUp = (props) =>{
         event.preventDefault()
 
         try{
-
+            setIsLodding(true)
             const obj = {
-                // name : enteredNameRef.current.value,
                 email : enteredEmailRef.current.value,
                 password : enteredPasswordRef.current.value
             }
 
-            const res = await axios.post("http://localhost:8000/user/login-data",obj)
-
+            const res = await axios.post(`http://${port}/user/login`,obj)
+            setIsLodding(false)
             // dispatch(tokenAction.loginHandler(res.data.token))
             dispatch(tokenAction.loginHandler({
                 token :res.data.token,

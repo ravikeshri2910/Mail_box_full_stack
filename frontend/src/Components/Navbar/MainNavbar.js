@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from './MainNavbar.module.css'
-import { NavLink , Link} from "react-router-dom/";
+import { NavLink } from "react-router-dom/";
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { tokenAction } from "../../Store/TokenContext";

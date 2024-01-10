@@ -1,6 +1,6 @@
 import React from "react";
 import SideBar from "../Components/sideBar/sideBar";
-import Dashbord from '../Components/Dashbord/Dashbord'
+import Dashboard from '../Components/Dashboard/Dashboard'
 import classes from './HomePage.module.css'
 
 const HomePage = (props) => {
@@ -12,7 +12,7 @@ const HomePage = (props) => {
         </div>
         <div className={classes.DashbordDiv}>
 
-            <Dashbord />
+            <Dashboard />
         </div>
     </div>
 }

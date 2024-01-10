@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import classes from './Dashbord.module.css'
-import DashbordData from "./DashbordData";
+import classes from './Dashboard.module.css'
+import DashbordData from "./DashboardData";
 import { useDispatch, useSelector } from "react-redux";
 import { stateAction } from "../../Store/StateContext";
 import axios from "axios";
@@ -33,12 +33,15 @@ const Dashbord = (props) => {
     const openMail = useSelector(state => state.stateReducer.openMail)
     const [mailData , setMAilData] = useState([])
 
+    const port = process.env.REACT_APP_PORT;
     const inboxData = async() =>{
 
         const token = localStorage.getItem('token')
 
+
+        console.log('token' ,  token)
         setIsLoading(true)
-        const res = await axios.get("http://localhost:8000/user/inbox-data",{
+        const res = await axios.get(`http://${port}/user/inbox`,{
             headers : {"Authorization" : token}
         })
 
@@ -57,7 +60,7 @@ const Dashbord = (props) => {
 
         const token = localStorage.getItem('token')
 
-        const res = await axios.get("http://localhost:8000/user/sent-data",{
+        const res = await axios.get(`http://${port}/user/sent`,{
             headers : {"Authorization" : token}
         })
         console.log('res', res)
@@ -83,9 +86,9 @@ const Dashbord = (props) => {
             <DashbordData 
             key = {mail.id}
             id = {mail.id}
-            to = {mail.to}
-            from = {mail.from}
-            unread = {mail.unRead}
+            receiver = {mail.receiver}
+            sender = {mail.sender}
+            openedByReceiver = {mail.openedByReceiver}
             subject = {mail.subject}
             />
         )

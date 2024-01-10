@@ -16,14 +16,16 @@ const ComposeEmail = () => {
     const subjectRef = useRef();
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
+    const port = process.env.REACT_APP_PORT;
+
     const closeBtnHandler = () => {
         dispatch(stateAction.modelHandler());
     };
 
-    const logEditorContent = async() => {
+    const logEditorContent = async () => {
         const contentState = editorState.getCurrentContent();
         const editorText = contentState.getPlainText();
-        const raw = convertToRaw(editorState.getCurrentContent());
+        // const raw = convertToRaw(editorState.getCurrentContent());
 
         // const to = toRef.current.value;
         // const subject = subjectRef.current.value;
@@ -33,29 +35,29 @@ const ComposeEmail = () => {
         // console.log('Subject:', subject);
 
         const obj = {
-            to : toRef.current.value,
-            subject : subjectRef.current.value,
-            body : editorText
+            receiverMail: toRef.current.value,
+            subject: subjectRef.current.value,
+            body: editorText
         }
 
         const token = localStorage.getItem('token')
 
-        const res = await axios.post("http://localhost:8000/user/sent",obj,{
-            headers : {"Authorization" : token}
+        const res = await axios.post(`http://${port}/user/mail`, obj, {
+            headers: { "Authorization": token }
         })
 
-        // console.log(res)
+        console.log(res)
 
         // Clear the editor's content
-        toRef.current.value=''
-        subjectRef.current.value=''
+        toRef.current.value = ''
+        subjectRef.current.value = ''
         setEditorState(EditorState.createEmpty());
         dispatch(stateAction.modelHandler());
     };
 
-    const onEditorStateChange = (editorState) => {
-        // Handle editor state changes if needed
-    };
+    // const onEditorStateChange = (editorState) => {
+    //     // Handle editor state changes if needed
+    // };
 
     return (<div className={classes.backdrop}>
         <div className={classes.ComposeBox}>

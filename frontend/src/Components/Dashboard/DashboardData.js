@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from './DashbordData.module.css'
+import classes from './DashboardData.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { stateAction } from "../../Store/StateContext";
 import axios from "axios";
@@ -10,6 +10,8 @@ const DashbordData = (props) => {
     const isDeleteInbox = useSelector(state => state.stateReducer.isDeleteInbox)
     const isSent = useSelector(state => state.stateReducer.isSent)
     const dispatch = useDispatch()
+
+    const port = process.env.REACT_APP_PORT;
 
     let tag;
     if (isDeleteInbox) {
@@ -21,9 +23,9 @@ const DashbordData = (props) => {
     const inboxdeleteHandler = async () => {
 
         const id = props.id
-        console.log('inbox')
+        // console.log('inbox')
         const token = localStorage.getItem('token')
-        const res = await axios.delete(`http://localhost:8000/user/delete-inbox-data/${id}`, {
+        const res = await axios.delete(`http://${port}/user/delete-inbox/${id}`, {
             headers: { "Authorization": token }
         })
 
@@ -33,9 +35,9 @@ const DashbordData = (props) => {
 
     const sentDeleteHandler = async () => {
         const id = props.id
-        console.log('sent')
+        // console.log('sent')
         const token = localStorage.getItem('token')
-        const res = await axios.delete(`http://localhost:8000/user/delete-sent-data/${id}`, {
+        const res = await axios.delete(`http://${port}/user/delete-sent/${id}`, {
             headers: { "Authorization": token }
         })
 
@@ -44,17 +46,17 @@ const DashbordData = (props) => {
     }
 
     const openMailHandlerDashboard = () => {
-        console.log(props.id)
+        // console.log(props.id)
         localStorage.setItem('id', props.id)
         dispatch(stateAction.openMailHandler())
     }
 
 
-    return <div className={classes.cardData}>
-        <div className={classes.unreadDiv}>
-            {!props.unread && <p className={classes.unread}></p>}
-        </div>
-        <div className={classes.toDiv} onClick={openMailHandlerDashboard}> {tag}{isDeleteInbox ? props.from : props.to}</div>
+    return <div className={!props.openedByReceiver && isDeleteInbox ? classes.cardDataUnread : classes.cardData}>
+        {/* <div className={classes.unreadDiv}> */}
+            {/* {!props.unread && <p className={classes.unread}></p>} */}
+        {/* </div> */}
+        <div className={classes.toDiv} onClick={openMailHandlerDashboard}> {tag}{isDeleteInbox ? props.sender : props.receiver}</div>
         <div className={classes.subjectDiv} onClick={openMailHandlerDashboard}>Subject: {props.subject}</div>
         <div className={classes.deleteDiv} onClick={isDeleteInbox ? inboxdeleteHandler : sentDeleteHandler}>
             Delete

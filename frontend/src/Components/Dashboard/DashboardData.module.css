@@ -9,6 +9,17 @@
     height: 35px;
     padding: 0.5% 0%;
 }
+.cardDataUnread {
+    /* /* border: 2px solid red; */
+    display: flex;
+    border-radius: 20px;
+    background-color: rgb(17, 168, 188);
+    width: 98%;
+    margin: 1% 1%;
+    font-weight: bold;
+    height: 35px;
+    padding: 0.5% 0%;
+}
 
 .toDiv {
         /* border: 2px solid red; */

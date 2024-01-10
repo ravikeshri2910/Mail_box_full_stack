@@ -1,5 +1,5 @@
 import React from "react";
-import SinUp from "../Components/Sinup-login/sinUp";
+import SinUp from "../Components/Sinup-login/sinup";
 
 
 const sinupPage = () =>{

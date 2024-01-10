@@ -6,17 +6,17 @@ exports.sinupRoute = async(req, res) =>{
 
     try{
 
-        const {name , email ,password } = req.body
+        const { email ,password } = req.body
 
         const saltround = 10;
         bcrypt.hash(password , saltround, async(error , hash)=>{
 
             let result = await User.create({
-                name,
+                
                 email,
                 password : hash
             })
-            res.status(201).json({ msg: 'Regitered', data: result })
+            res.status(201).json({ msg: 'Registered', data: result })
         })
 
 
@@ -27,7 +27,7 @@ exports.sinupRoute = async(req, res) =>{
 }
 
 function generateWebToken(id){
-    return jwt.sign({userId : id}, 'fgdfjghdsfjkghsdfkjlghfdjkljdslfkghfdsjklkgjkldfsh')
+    return jwt.sign({userId : id}, process.env.SECRET_KEY)
 }
 
 exports.logInRoute = async(req, res) =>{
@@ -51,7 +51,6 @@ exports.logInRoute = async(req, res) =>{
             }
         })
 
-        // res.status(201).json({msg : 'Login', user : user})
 
 
     }catch(err){

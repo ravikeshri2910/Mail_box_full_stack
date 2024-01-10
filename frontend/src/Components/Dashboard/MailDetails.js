@@ -11,46 +11,53 @@ const MailDetail = (props) => {
     const isDeleteInbox = useSelector(state => state.stateReducer.isDeleteInbox)
     const [mailData, setMAilData] = useState([])
 
-    console.log('isDeleteInbox', isDeleteInbox)
+    const port = process.env.REACT_APP_PORT;
 
-    const getSentMailDataIndividual = async () => {
+    // console.log('isDeleteInbox', isDeleteInbox)
 
+    const getMailDataIndividual = async () => {
+
+        // console.log('inbox mail')
         const id = localStorage.getItem('id')
         const token = localStorage.getItem('token')
-        const res = await axios.get(`http://localhost:8000/user/get-sentMail-data/${id}`, {
+        const res = await axios.get(`http://${port}/user/mail/${id}`, {
             headers: { "Authorization": token }
         })
 
+        // console.log('res', res)
         setMAilData(res.data.msg)
-        console.log(res.data.msg)
     }
 
-    const getInboxMailDataIndividual = async () => {
+    const openByreceiver = async () => {
 
-        console.log('inbox mail')
+        console.log('update')
         const id = localStorage.getItem('id')
         const token = localStorage.getItem('token')
-        const res = await axios.get(`http://localhost:8000/user/get-inboxMail-data/${id}`, {
+        const res = await axios.get(`http://${port}/user/mailopened/${id}`, {
             headers: { "Authorization": token }
         })
+        console.log('update2')
 
-        console.log('res' , res)
-        setMAilData(res.data.msg)
+        console.log('update' ,res)
     }
 
     useEffect(() => {
-        if (isDeleteInbox ===true) {
-            getInboxMailDataIndividual()
-        }else if(isDeleteInbox===false){
-            getSentMailDataIndividual()
+        getMailDataIndividual()
+    }, [])
+
+    useEffect(() => {
+        if (isDeleteInbox) {
+            getMailDataIndividual()
+            openByreceiver()
         }
     }, [isDeleteInbox])
+
 
 
     return <>
         <Card className={classes.mailDetaildiv} style={{ width: '45rem' }}>
             <ListGroup className="list-group-flush">
-                <ListGroup.Item><b>{isDeleteInbox ? 'From: ' : 'To: '}{isDeleteInbox ? mailData.from : mailData.to}</b></ListGroup.Item>
+                <ListGroup.Item><b>{isDeleteInbox ? 'From: ' : 'To: '}{isDeleteInbox ? mailData.sender : mailData.receiver}</b></ListGroup.Item>
             </ListGroup>
             <Card.Body>
                 <Card.Title>Subject: {mailData.subject}</Card.Title>
