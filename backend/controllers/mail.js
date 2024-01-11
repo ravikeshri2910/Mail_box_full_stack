@@ -13,8 +13,8 @@ exports.inboxRouter = async (req, res) => {
                 email: receiverMail
             }
         })
-        console.log('inbox', receiverMail)
-        console.log('inbox', receiver)
+        // console.log('inbox', receiverMail)
+        // console.log('inbox', receiver)
 
         if (!receiver) {
 
@@ -59,7 +59,7 @@ exports.getSentData = async (req, res) => {
 
         const id = req.user.id
 
-        console.log('req.user6 ' , req.user)
+        // console.log('req.user6 ' , req.user)
         const data = await mail.findAll({ where: { senderId: id } })
         res.status(201).json({ msg: data })
 

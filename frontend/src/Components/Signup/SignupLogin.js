@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-import classes from './sinup.module.css'
+import classes from './Signup.module.css'
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { tokenAction } from '../../Store/TokenContext';

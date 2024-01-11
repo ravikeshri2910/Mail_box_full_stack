@@ -1,29 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import classes from './Dashboard.module.css'
 import DashbordData from "./DashboardData";
 import { useDispatch, useSelector } from "react-redux";
 import { stateAction } from "../../Store/StateContext";
 import axios from "axios";
 import MailDetail from "./MailDetails";
 
-const d = [
-    {
-        id: 'p1',
-        to: 'rarjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjara',
-        subject:'dcbdhcbschhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhcbc',
-    },
-    {
-        id: 'p2',
-        to: 'rarara',
-        subject: 'dcbdhcbschcbchbc',
-    },
-    {
-        id: 'p3',
-        to: 'rarara',
-        subject: 'dcbdhcbschcbchbc',
-    },
-]
+
 const Dashbord = (props) => {
 
     const dispatch = useDispatch()

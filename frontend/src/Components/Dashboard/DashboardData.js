@@ -8,7 +8,6 @@ import axios from "axios";
 const DashbordData = (props) => {
 
     const isDeleteInbox = useSelector(state => state.stateReducer.isDeleteInbox)
-    const isSent = useSelector(state => state.stateReducer.isSent)
     const dispatch = useDispatch()
 
     const port = process.env.REACT_APP_PORT;

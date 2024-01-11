@@ -17,10 +17,6 @@ const Email = require('./models/mail')
 const User = require('./models/user')
 
 
-// // Define association between Email and User
-// Email.belongsTo(User, { as: 'senderId', foreignKey: 'senderId' });
-// Email.belongsTo(User, { as: 'receive6Idr', foreignKey: 'receiverId' });
-
 
 app.use('/user',userRoute)
 // app.use('/mail',mailRoute)
@@ -33,5 +29,5 @@ sequelize
             app.listen(process.env.PORT)
             // console.log(result)
         })
-        .catch(err => (console.log('error')))
+        .catch(err => (console.log(err)))
 

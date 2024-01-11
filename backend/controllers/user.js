@@ -8,6 +8,7 @@ exports.sinupRoute = async(req, res) =>{
 
         const { email ,password } = req.body
 
+        // console.log(email)
         const saltround = 10;
         bcrypt.hash(password , saltround, async(error , hash)=>{
 

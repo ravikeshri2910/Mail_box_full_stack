@@ -2,7 +2,7 @@
 import './App.css';
 
 import { Route, Switch } from 'react-router-dom';
-import SinUp from './Components/Sinup-login/sinupLogin';
+import Sinup from './Components/Signup/SignupLogin'
 import MainNavbar from './Components/Navbar/MainNavbar';
 import HomePage from './Pages/HomePage';
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <MainNavbar />
       <Switch>
         <Route path='/' exact>
-          <SinUp />
+          <Sinup />
         </Route>
         <Route path='/home' >
           <HomePage />

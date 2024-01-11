@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "../Components/sideBar/sideBar";
+import SideBar from "../Components/SideBar/sideBar";
 import Dashboard from '../Components/Dashboard/Dashboard'
 import classes from './HomePage.module.css'
 
